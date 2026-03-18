@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050810">
+<title>SnakeWars.io — Jeu de Serpent Battle Royale Multijoueur Gratuit</title>
+<meta name="description" content="Joue à SnakeWars.io, le jeu de serpent Battle Royale multijoueur en ligne ! Affronte des joueurs du monde entier, débloque des skins, grimpe dans les classements. 100% gratuit sur navigateur.">
+<meta name="keywords" content="snake wars, jeu serpent multijoueur, snake battle royale, snakewars io, jeu serpent gratuit, snake io, jeu navigateur gratuit, serpent en ligne">
+<meta name="author" content="Hervé Caporale — hervecaporale17@gmail.com">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://snakewars-game26.github.io/snakewars/home.html">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+
+<!-- Open Graph -->
+<meta property="og:title" content="SnakeWars.io — Jeu de Serpent Battle Royale">
+<meta property="og:description" content="Le jeu de serpent Battle Royale multijoueur ! Affronte des joueurs en ligne. Gratuit sur navigateur.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="SnakeWars.io">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SnakeWars.io — Jeu de Serpent Battle Royale">
+<meta name="twitter:description" content="Le jeu de serpent Battle Royale multijoueur ! Gratuit sur navigateur.">
+
+<!-- Google Consent Mode v2 — OBLIGATOIRE AVANT ADSENSE ET GTAG -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage:              'denied',
+    ad_user_data:            'denied',
+    ad_personalization:      'denied',
+    analytics_storage:       'denied',
+    functionality_storage:   'denied',
+    personalization_storage: 'denied',
+    security_storage:        'granted',
+    wait_for_update:         2000
+  });
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'url_passthrough', true);
+</script>
+
+<!-- Google Analytics — chargé après consent -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9Q04XKXKD2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9Q04XKXKD2', { anonymize_ip: true });
+</script>
+
+<!-- Google AdSense -->
+<meta name="google-adsense-account" content="ca-pub-5433648295830648">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5433648295830648" crossorigin="anonymous"></script>
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "SnakeWars.io",
+  "description": "Jeu de serpent Battle Royale multijoueur en ligne nouvelle génération",
+  "url": "https://snakewars-game26.github.io/snakewars",
+  "genre": ["Action", "Multijoueur", "Battle Royale", "Arcade"],
+  "gamePlatform": "Navigateur Web",
+  "applicationCategory": "Game",
+  "operatingSystem": "Any",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"},
+  "author": {"@type": "Person", "name": "Hervé Caporale", "email": "hervecaporale17@gmail.com"}
+}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Exo+2:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: #050810;
+    font-family: 'Exo 2', sans-serif;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid background animé */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,.04) 1px, transparent 1px);
+    background-size: 55px 55px;
+    animation: bgScroll 25s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes bgScroll { to { background-position: 55px 55px; } }
+
+  .page { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 0 1rem 4rem; }
+
+  /* ── HERO ── */
+  .hero {
+    text-align: center;
+    padding: 2.5rem 1rem 1.5rem;
+    background: radial-gradient(ellipse at 50% 0%, rgba(0,100,255,.15) 0%, transparent 70%);
+  }
+  .logo {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #00d4ff, #ff006e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: .1em;
+    margin-bottom: .3rem;
+  }
+  .logo-sub {
+    font-size: .7rem;
+    color: rgba(255,255,255,.4);
+    letter-spacing: .3em;
+    margin-bottom: 1.2rem;
+  }
+  .hero-desc {
+    font-size: .9rem;
+    color: rgba(255,255,255,.7);
+    line-height: 1.8;
+    margin-bottom: 1.8rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── BOUTON JOUER ── */
+  .play-btn {
+    display: inline-block;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    font-weight: 900;
+    padding: 1rem 3.5rem;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #00d4ff, #0066ff);
+    color: #050810;
+    box-shadow: 0 0 50px rgba(0,212,255,.45);
+    letter-spacing: .12em;
+    text-decoration: none;
+    transition: transform .15s, box-shadow .15s;
+    margin-bottom: .6rem;
+  }
+  .play-btn:hover { transform: scale(1.05); box-shadow: 0 0 70px rgba(0,212,255,.65); }
+  .play-note { font-size: .6rem; color: rgba(255,255,255,.3); letter-spacing: .1em; }
+
+  /* ── PUB ── */
+  .ad-block {
+    width: 100%;
+    background: rgba(255,255,255,.02);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 12px;
+    padding: .5rem;
+    text-align: center;
+    margin: 1.2rem 0;
+    overflow: hidden;
+  }
+  .ad-label {
+    font-size: .45rem;
+    color: rgba(255,255,255,.2);
+    letter-spacing: .15em;
+    margin-bottom: .3rem;
+    font-family: 'Orbitron', monospace;
+  }
+
+  /* ── FEATURES ── */
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .8rem;
+    margin: 1.5rem 0;
+  }
+  .feat {
+    background: rgba(0,212,255,.05);
+    border: 1px solid rgba(0,212,255,.15);
+    border-radius: 14px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .feat-icon { font-size: 1.6rem; margin-bottom: .4rem; }
+  .feat-title {
+    font-family: 'Orbitron', monospace;
+    font-size: .55rem;
+    color: #00d4ff;
+    font-weight: 700;
+    letter-spacing: .1em;
+    margin-bottom: .3rem;
+  }
+  .feat-desc { font-size: .65rem; color: rgba(255,255,255,.6); line-height: 1.5; }
+
+  /* ── SEO SECTIONS ── */
+  .seo-section {
+    border-radius: 14px;
+    padding: 1.2rem;
+    margin-bottom: .8rem;
+  }
+  .seo-section h2 {
+    font-family: 'Orbitron', monospace;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    margin-bottom: .7rem;
+  }
+  .seo-section p {
+    font-size: .72rem;
+    color: rgba(255,255,255,.6);
+    line-height: 1.85;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 99;
+    background: rgba(5,8,20,.97);
+    border-top: 1px solid rgba(0,212,255,.12);
+    padding: .45rem 1rem;
+    text-align: center;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .7rem;
+    margin-bottom: .2rem;
+  }
+  .footer-links a {
+    color: rgba(255,255,255,.35);
+    font-size: .48rem;
+    font-family: 'Orbitron', monospace;
+    text-decoration: none;
+    letter-spacing: .05em;
+  }
+  .footer-links a:hover { color: #00d4ff; }
+  .footer-copy { font-size: .42rem; color: rgba(255,255,255,.12); font-family: 'Orbitron', monospace; }
+
+  /* Cookie banner */
+  #cookieBanner {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 999;
+    background: linear-gradient(180deg, rgba(5,5,25,.97), rgba(8,3,20,.99));
+    border-top: 2px solid rgba(0,212,255,.4);
+    padding: 1rem 1rem 1.2rem;
+    backdrop-filter: blur(20px);
+  }
+  #cookieBanner .ck-inner {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+  }
+  #cookieBanner p { font-size: .7rem; color: rgba(255,255,255,.7); line-height: 1.6; }
+  .ck-btns { display: flex; gap: .6rem; }
+  .ck-accept {
+    flex: 1; padding: .6rem; border: none; border-radius: 10px;
+    background: linear-gradient(135deg,#00d4ff,#0066ff);
+    color: #050810; font-family: 'Orbitron', monospace;
+    font-size: .6rem; font-weight: 700; cursor: pointer;
+  }
+  .ck-refuse {
+    flex: 1; padding: .6rem; border: 1px solid rgba(255,255,255,.15);
+    border-radius: 10px; background: transparent;
+    color: rgba(255,255,255,.5); font-family: 'Orbitron', monospace;
+    font-size: .6rem; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero">
+    <div class="logo">SNAKEWARS</div>
+    <div class="logo-sub">⚡ BATTLE ROYALE ⚡</div>
+    <p class="hero-desc">Le jeu de serpent <strong style="color:#00d4ff;">Battle Royale multijoueur</strong> <strong style="color:#ff006e;">100 joueurs</strong> — sans inscription, 100% gratuit ! La zone rétrécit, pas de respawn, le dernier serpent en vie gagne. Équipe tes skills et plonge dans l\'arène.</p>
+    <a class="play-btn" href="index.html" onclick="sessionStorage.setItem('sw_from_home','1')">▶ JOUER MAINTENANT</a>
+    <div class="play-note">GRATUIT · SANS INSCRIPTION · NAVIGATEUR</div>
+  </div>
+
+  <!-- ═══ PUB BANNIÈRE HAUT ═══ -->
+  <div class="ad-block">
+    <div class="ad-label">PUBLICITÉ</div>
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;min-height:90px;"
+         data-ad-client="ca-pub-5433648295830648"
+         data-ad-slot="5101438658"
+         data-ad-format="horizontal"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- ═══ FEATURES ═══ -->
+  <div class="features">
+    <div class="feat">
+      <div class="feat-icon">💀</div>
+      <div class="feat-title">100 JOUEURS</div>
+      <div class="feat-desc">Parties de 100 joueurs en temps réel — pas de respawn !</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">⚔️</div>
+      <div class="feat-title">BATTLE ROYALE</div>
+      <div class="feat-desc">6 zones avec pouvoirs différents — la zone rétrécit jusqu'au dernier</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🎨</div>
+      <div class="feat-title">20 SKINS</div>
+      <div class="feat-desc">3 skins gratuits + 17 achetables avec des coins</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">💎</div>
+      <div class="feat-title">20 ACCESSOIRES</div>
+      <div class="feat-desc">Chapeaux, écharpes, traînées — achetables avec des coins</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">⚡</div>
+      <div class="feat-title">SKILLS À ÉQUIPER</div>
+      <div class="feat-desc">Bouclier, Aimant, Turbo, Bombe — choisis ton build avant chaque partie</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">📺</div>
+      <div class="feat-title">COINS GRATUITS</div>
+      <div class="feat-desc">Regarde des pubs pour gagner des coins et débloquer skins & skills</div>
+    </div>
+  </div>
+
+  <!-- ═══ PUB MILIEU ═══ -->
+  <div class="ad-block">
+    <div class="ad-label">PUBLICITÉ</div>
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;min-height:250px;"
+         data-ad-client="ca-pub-5433648295830648"
+         data-ad-slot="5101438658"
+         data-ad-format="rectangle"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- ═══ SEO CONTENT ═══ -->
+  <div class="seo-section" style="background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.12);">
+    <h2>🐍 Comment jouer à SnakeWars.io ?</h2>
+    <p>Entre ton pseudo, choisis ton skin et configure ton <strong>build de skills</strong> (jusqu'à 3 skills actifs par partie). Lance-toi dans l'arène avec 99 autres joueurs ! Mange les orbes lumineux pour grandir, coupe la route de tes adversaires pour les éliminer. Reste dans la zone de jeu qui rétrécit et sois le <strong>dernier serpent en vie</strong> pour gagner. Pas de respawn — chaque vie compte !</p>
+  </div>
+
+  <div class="seo-section" style="background:rgba(255,0,110,.04);border:1px solid rgba(255,0,110,.12);">
+    <h2 style="color:#ff006e;">⚡ Mode Battle Royale</h2>
+    <p>SnakeWars.io propose un unique mode <strong style="color:#ff006e;">Battle Royale 100 joueurs</strong>. La map contient <strong>6 zones distinctes</strong>, chacune avec des pouvoirs différents (boost de vitesse, aimant, zone toxique, zone de soins...). La zone de jeu rétrécit progressivement — reste dedans ou tu perds de la vie. Pas de respawn : une fois éliminé, c'est fini ! Le dernier serpent en vie remporte la manche et des coins bonus.</p>
+  </div>
+
+  <div class="seo-section" style="background:rgba(255,215,0,.04);border:1px solid rgba(255,215,0,.12);">
+    <h2 style="color:#ffd700;">🪙 Skins & Récompenses</h2>
+    <p>Les coins se gagnent <strong style="color:#ffd700;">uniquement en regardant des publicités</strong> — c'est ce qui permet au jeu de rester 100% gratuit. Avec tes coins tu peux acheter : <strong>17 skins</strong> (les 3 de base sont gratuits), <strong>20 accessoires</strong> (chapeaux, écharpes, traînées) et des <strong>skills spéciaux</strong> (Bouclier, Aimant, Turbo, Bombe, Fantôme...) à équiper avant chaque partie. ⚠️ Attention : si tu effaces ton cache, tes achats disparaissent !</p>
+  </div>
+
+  <!-- ═══ BOUTON JOUER x2 ═══ -->
+  <div style="text-align:center;margin:1.5rem 0;">
+    <a class="play-btn" href="index.html" onclick="sessionStorage.setItem('sw_from_home','1')">▶ JOUER MAINTENANT</a>
+    <div class="play-note" style="margin-top:.5rem;">GRATUIT · SANS INSCRIPTION</div>
+  </div>
+
+  <!-- ═══ PUB BAS ═══ -->
+  <div class="ad-block">
+    <div class="ad-label">PUBLICITÉ</div>
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;min-height:90px;"
+         data-ad-client="ca-pub-5433648295830648"
+         data-ad-slot="5101438658"
+         data-ad-format="horizontal"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="seo-section" style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);">
+    <h2 style="color:rgba(255,255,255,.35);">📱 Compatibilité</h2>
+    <p style="color:rgba(255,255,255,.35);">SnakeWars.io est compatible avec tous les appareils et navigateurs modernes : Android, iOS, Windows, Mac. Chrome, Firefox, Safari et Edge. Aucun plugin ou installation requis. Joue directement depuis ton navigateur en quelques secondes !</p>
+  </div>
+
+</div><!-- /page -->
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-links">
+    <a href="index.html" onclick="sessionStorage.setItem('sw_from_home','1')">🎮 Jouer</a>
+    <a href="#" onclick="document.getElementById('cookieBanner').style.display='block';return false;">🍪 Cookies</a>
+    <a href="mailto:hervecaporale17@gmail.com">✉️ Contact</a>
+    <span style="color:rgba(255,255,255,.1);font-size:.48rem;">hervecaporale17@gmail.com</span>
+  </div>
+  <div class="footer-copy">© 2026 SnakeWars.io · Tous droits réservés · Hervé Caporale</div>
+</footer>
+
+<!-- ═══ BANDEAU COOKIES RGPD ═══ -->
+<div id="cookieBanner">
+  <div class="ck-inner">
+    <p>🍪 <strong style="color:#00d4ff;">SnakeWars.io</strong> utilise des cookies publicitaires Google AdSense et des cookies analytiques pour améliorer votre expérience et financer ce jeu gratuit.</p>
+    <div class="ck-btns">
+      <button class="ck-accept" onclick="acceptCookies()">✅ ACCEPTER</button>
+      <button class="ck-refuse" onclick="refuseCookies()">Refuser</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Cookies RGPD
+function acceptCookies() {
+  localStorage.setItem('ck_consent', 'accepted');
+  gtag('consent', 'update', {
+    ad_storage: 'granted',
+    ad_user_data: 'granted',
+    ad_personalization: 'granted',
+    analytics_storage: 'granted'
+  });
+  document.getElementById('cookieBanner').style.display = 'none';
+}
+
+function refuseCookies() {
+  localStorage.setItem('ck_consent', 'refused');
+  document.getElementById('cookieBanner').style.display = 'none';
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  const consent = localStorage.getItem('ck_consent');
+  if (!consent) {
+    setTimeout(function() {
+      document.getElementById('cookieBanner').style.display = 'block';
+    }, 1500);
+  } else if (consent === 'accepted') {
+    gtag('consent', 'update', {
+      ad_storage: 'granted', ad_user_data: 'granted',
+      ad_personalization: 'granted', analytics_storage: 'granted'
+    });
+  }
+});
+</script>
+</body>
+</html>
